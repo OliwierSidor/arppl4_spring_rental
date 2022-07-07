@@ -23,11 +23,24 @@ public class CarController {
         return allCars;
     }
 
-    @PostMapping
+    @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     public void addCar(@RequestBody Car car) {
-        log.info("Wywołano dodanie samochodu: " + car);
+        log.info("Wywołano metodę addCar: " + car);
         carService.addCar(car);
+    }
+
+    @PatchMapping("/update")
+    public void updateCar(@RequestBody Car car) {
+        log.info("Wywołano aktualizacje danych samochodu: " + car);
+        carService.updateCar(car);
+    }
+
+    @DeleteMapping("/delete/{identifier}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteCar(@PathVariable(name = "identifier") Long id) {
+        log.info("Wywołano metodę deleteCar: " + id);
+        carService.deleteCar(id);
     }
 
 }

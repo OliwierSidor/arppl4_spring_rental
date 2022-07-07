@@ -1,0 +1,154 @@
+###
+POST http://localhost:8080/api/car
+Content-Type: application/json
+
+{
+  "name": "CLA",
+  "brand": "Mercedes-Benz",
+  "productionDate": "2022-07-07",
+  "carBody": "SEDAN",
+  "seats": 5,
+  "gearbox": "AUTO",
+  "capacityEngine": 2.0
+}
+
+###
+POST http://localhost:8080/api/car
+Content-Type: application/json
+
+{
+  "name": "Rapid",
+  "brand": "Skoda",
+  "productionDate": "2021-07-07",
+  "carBody": "SEDAN",
+  "seats": 5,
+  "gearbox": "MANUAL",
+  "capacityEngine": 1.2
+
+}
+
+###
+POST http://localhost:8080/api/car
+Content-Type: application/json
+
+{
+  "name": "Volkswagen",
+  "brand": "Passat",
+  "productionDate": "1996-07-07",
+  "carBody": "SEDAN",
+  "seats": 5,
+  "gearbox": "MANUAL",
+  "capacityEngine": 2.0
+}
+
+###
+POST http://localhost:8080/api/car
+Content-Type: application/json
+
+{
+  "name": "Kia",
+  "brand": "Optima",
+  "productionDate": "2016-07-07",
+  "carBody": "SEDAN",
+  "seats": 5,
+  "gearbox": "AUTO",
+  "capacityEngine": 1.8
+}
+
+###
+POST http://localhost:8080/api/car
+Content-Type: application/json
+
+{
+  "name": "Spider",
+  "brand": "Fiat",
+  "productionDate": "2022-07-07",
+  "carBody": "CABRIO",
+  "seats": 2,
+  "gearbox": "AUTO",
+  "capacityEngine": 1.6
+}
+
+###
+POST http://localhost:8080/api/car
+Content-Type: application/json
+
+{
+  "name": "Renault",
+  "brand": "Talisman",
+  "productionDate": "2018-07-07",
+  "carBody": "SEDAN",
+  "seats": 5,
+  "gearbox": "AUTO",
+  "capacityEngine": 2.0
+}
+
+###
+POST http://localhost:8080/api/car
+Content-Type: application/json
+
+{
+  "name": "GLE",
+  "brand": "Mercedes-Benz",
+  "productionDate": "2022-07-07",
+  "carBody": "SUV",
+  "seats": 5,
+  "gearbox": "AUTO",
+  "capacityEngine": 3.0
+}
+
+###
+POST http://localhost:8080/api/car
+Content-Type: application/json
+
+{
+  "name": "G",
+  "brand": "Mercedes-Benz",
+  "productionDate": "1990-07-07",
+  "carBody": "SUV",
+  "seats": 5,
+  "gearbox": "AUTO",
+  "capacityEngine": 5.0
+}
+
+###
+POST http://localhost:8080/api/car
+Content-Type: application/json
+
+{
+  "name": "Caro",
+  "brand": "Polonez",
+  "productionDate": "1996-07-07",
+  "carBody": "SEDAN",
+  "seats": 5,
+  "gearbox": "MANUAL",
+  "capacityEngine": 1.9
+}
+
+###
+POST http://localhost:8080/api/car
+Content-Type: application/json
+
+{
+  "name": "3",
+  "brand": "BMW",
+  "productionDate": "2019-07-07",
+  "carBody": "CABRIO",
+  "seats": 5,
+  "gearbox": "AUTO",
+  "capacityEngine": 1.4
+}
+
+###
+POST http://localhost:8080/api/car
+Content-Type: application/json
+
+{
+  "name": "RAV-4",
+  "brand": "Toyota",
+  "productionDate": "2017-07-07",
+  "carBody": "SUV",
+  "seats": 5,
+  "gearbox": "AUTO",
+  "capacityEngine": 1.4
+}
