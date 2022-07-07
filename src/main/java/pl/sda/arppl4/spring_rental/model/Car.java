@@ -1,4 +1,4 @@
-package pl.sda.arppl4.spring_rental.Model;
+package pl.sda.arppl4.spring_rental.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
