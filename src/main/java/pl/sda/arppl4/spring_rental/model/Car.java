@@ -32,7 +32,7 @@ public class Car {
 
     private Double capacityEngine;
 
-    @OneToMany
+    @OneToMany(mappedBy = "car")
     @EqualsAndHashCode.Exclude
     private Set<CarRental> carRentals;
 

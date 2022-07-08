@@ -1,6 +1,7 @@
 package pl.sda.arppl4.spring_rental.model;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -17,20 +18,25 @@ public class CarRental {
     private String clientName;
     private String clientSurname;
 
+    @CreationTimestamp
     private LocalDateTime rentDateTime;
+
     private LocalDateTime returnDateTime;
-    private Double priceForH;
+    private Double price;
 
     @ManyToOne
     @ToString.Exclude
     private Car car;
 
-    public CarRental(String clientName, String clientSurname, LocalDateTime rentDateTime, Double priceForH, Car car) {
-        this.clientName = clientName;
-        this.clientSurname = clientSurname;
-        this.rentDateTime = rentDateTime;
-        this.priceForH = priceForH;
-        this.car = car;
+    public CarRental(CarRental params) {
+        this.clientName = params.clientName;
+        this.clientSurname = params.clientSurname;
+        this.price = params.price;
+        this.car = params.car;
+    }
+
+    public boolean isRented() {
+        return returnDateTime == null;
     }
 }
 
