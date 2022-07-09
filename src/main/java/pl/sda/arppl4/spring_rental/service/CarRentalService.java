@@ -92,6 +92,6 @@ public class CarRentalService {
                 }
             }
         }
-        throw new CarNotAvailableException("Not found");
+        throw new CarNotAvailableException("Car not available, id:");
     }
 }

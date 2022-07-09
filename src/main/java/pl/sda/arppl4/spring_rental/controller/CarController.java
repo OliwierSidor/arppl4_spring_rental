@@ -31,6 +31,7 @@ public class CarController {
     }
 
     @PatchMapping("/update")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public void updateCar(@RequestBody Car car) {
         log.info("Wywołano metodę aktualizacje danych samochodu: " + car);
         carService.updateCar(car);
