@@ -1,9 +1,11 @@
 package pl.sda.arppl4.spring_rental.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import pl.sda.arppl4.spring_rental.model.dto.CarDTO;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -36,13 +38,16 @@ public class Car {
     @EqualsAndHashCode.Exclude
     private Set<CarRental> carRentals;
 
-    public Car(String name, String brand, LocalDate productionDate, CarBody carBody, Integer seats, Gearbox gearbox, Double capacityEngine) {
-        this.name = name;
-        this.brand = brand;
-        this.productionDate = productionDate;
-        this.carBody = carBody;
-        this.seats = seats;
-        this.gearbox = gearbox;
-        this.capacityEngine = capacityEngine;
+    public CarDTO mapToCarDTO() {
+        return new CarDTO(
+                id,
+                name,
+                brand,
+                productionDate,
+                carBody,
+                seats,
+                gearbox,
+                capacityEngine
+        );
     }
 }

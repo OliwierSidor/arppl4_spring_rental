@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.arppl4.spring_rental.model.Car;
+import pl.sda.arppl4.spring_rental.model.dto.CarDTO;
 import pl.sda.arppl4.spring_rental.service.CarService;
 
 import java.util.List;
@@ -17,10 +18,9 @@ public class CarController {
     private final CarService carService;
 
     @GetMapping("/list")
-    public List<Car> carList() {
-        log.info("Wywołano metodę carList");
-        List<Car> allCars = carService.carList();
-        return allCars;
+    public List<CarDTO> findAll() {
+        log.info("Wywołano metodę findAll");
+        return carService.findAll();
     }
 
     @PostMapping("/add")

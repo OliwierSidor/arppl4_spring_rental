@@ -1,5 +1,6 @@
 package pl.sda.arppl4.spring_rental.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -20,19 +21,18 @@ public class CarRental {
 
     @CreationTimestamp
     private LocalDateTime rentDateTime;
-
     private LocalDateTime returnDateTime;
     private Double price;
 
-    @ManyToOne
+    @ManyToOne()
+    @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Car car;
 
-    public CarRental(CarRental params) {
-        this.clientName = params.clientName;
-        this.clientSurname = params.clientSurname;
-        this.price = params.price;
-        this.car = params.car;
+    public CarRental(String clientName, String clientSurname, Double price) {
+        this.clientName = clientName;
+        this.clientSurname = clientSurname;
+        this.price = price;
     }
 
     public boolean isRented() {

@@ -3,13 +3,16 @@ package pl.sda.arppl4.spring_rental.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import pl.sda.arppl4.spring_rental.exception.CarNotAvailableException;
 import pl.sda.arppl4.spring_rental.model.Car;
 import pl.sda.arppl4.spring_rental.model.CarRental;
+import pl.sda.arppl4.spring_rental.model.dto.CarDTO;
+import pl.sda.arppl4.spring_rental.model.dto.RentCarRequest;
 import pl.sda.arppl4.spring_rental.repository.CarRentalRepository;
 import pl.sda.arppl4.spring_rental.repository.CarRepository;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +26,12 @@ public class CarRentalService {
     private final CarRentalRepository carRentalRepository;
     private final CarRepository carRepository;
 
-    public List<Car> carAvailableList() {
+    public List<CarDTO> carAvailableList() {
         List<Car> carList = carRepository.findAll();
-        List<Car> availableCars = new ArrayList<>();
+        List<CarDTO> availableCars = new ArrayList<>();
         for (Car car : carList) {
             if (!isRented(car)) {
-                availableCars.add(car);
+                availableCars.add(car.mapToCarDTO());
             }
         }
         return availableCars;
@@ -55,42 +58,40 @@ public class CarRentalService {
         return Optional.empty();
     }
 
-    public void rentCar(Long carId, CarRental params) {
-        Optional<Car> carToRent = getCar(carId, false);
+    public void rentCar(Long carId, RentCarRequest request) {
+        Optional<Car> carToRent = carRepository.findById(carId);
         if (carToRent.isPresent()) {
-            CarRental newRental = new CarRental(params);
-            carRentalRepository.save(newRental);
+            Car car = carToRent.get();
+            if (!isRented(car)) {
+                CarRental carRental = mapRentCarRequestToCarRental(request);
+                carRental.setCar(car);
+                carRentalRepository.save(carRental);
+                return;
+            }
+            throw new CarNotAvailableException("Car not available, id: " + carId);
         }
+        throw new EntityNotFoundException("Unable to find car with id: " + carId);
     }
 
-    public double returnCar(Long carId) {
-        Optional<Car> carToRent = getCar(carId, true);
-        if (carToRent.isPresent()) {
-            Set<CarRental> rentals = carToRent.get().getCarRentals();
+    private CarRental mapRentCarRequestToCarRental(RentCarRequest request) {
+        return new CarRental(
+                request.getNameOfTheClient(),
+                request.getSurnameOfTheClient(),
+                request.getHourlyPrice());
+    }
+
+    public void returnCar(Long carId) {
+        Optional<Car> carToReturn = getCar(carId, true);
+        if (carToReturn.isPresent()) {
+            Set<CarRental> rentals = carToReturn.get().getCarRentals();
             for (CarRental rental : rentals) {
                 if (rental.isRented()) {
                     rental.setReturnDateTime(LocalDateTime.now());
                     carRentalRepository.save(rental);
-                    double seconds = ChronoUnit.SECONDS.between(rental.getRentDateTime(), rental.getReturnDateTime());
-                    double hours = seconds/3600d;
-                    return rental.getPrice() * hours;
+                    return;
                 }
             }
         }
-        throw new RuntimeException("Not found");
+        throw new CarNotAvailableException("Not found");
     }
 }
-// Szukasz obiekt w bazie
-// Po znalezieniu (upewnij się że jest) wypakuj
-// Stwórz nowy najem (nowy rekord/obiekt) najmu
-// CarRental musi zawierać: imie, nazwisko, cena
-// NIE BĘDZIE NIGDY WYNAJMU BEZ USTAWIONEJ DATY STARTU
-// OD tego momentu istnieje zmienna / obiekt carRental
-// Do CarRental przypisujesz (setCar()) samochód który wcześniej wypakowales
-// zapisuejsz do bazy car rental.
-
-// Szukasz obiekt w bazie
-// Po znalezieniu (upewnij się że jest) wypakuj
-// Przeszukaj listę w poszukiwaniu najmu (na liiście powiązanej z samochod) który nie jest zamkniety
-// po znalezieniu takiego najmu ustaw mu date zakonczenia na now()
-// zapisuejsz do bazy car rental.
