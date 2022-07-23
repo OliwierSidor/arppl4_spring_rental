@@ -19,8 +19,8 @@ public class CarService {
     private final CarRepository carRepository;
 
     public List<CarDTO> findAll() {
-        List<Car> carList = carRepository.findAll();
 
+        List<Car> carList = carRepository.findAll();
         List<CarDTO> cars = new ArrayList<>();
         for (Car car : carList) {
             cars.add(car.mapToCarDTO());

@@ -13,7 +13,6 @@ import pl.sda.arppl4.spring_rental.repository.CarRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

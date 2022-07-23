@@ -37,11 +37,10 @@ public class CarController {
         carService.updateCar(car);
     }
 
-    @DeleteMapping("/delete/{identifier}")
+    @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteCar(@PathVariable(name = "identifier") Long id) {
+    public void deleteCar(@PathVariable(name = "id") Long id) {
         log.info("Wywołano metodę deleteCar: " + id);
         carService.deleteCar(id);
     }
-
 }

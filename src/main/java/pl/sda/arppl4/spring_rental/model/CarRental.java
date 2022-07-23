@@ -1,6 +1,5 @@
 package pl.sda.arppl4.spring_rental.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 

@@ -1,6 +1,5 @@
 package pl.sda.arppl4.spring_rental.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
